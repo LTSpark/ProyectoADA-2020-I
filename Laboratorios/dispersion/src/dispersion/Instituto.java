@@ -249,16 +249,21 @@ public class Instituto {
         if (getCodigoDelAlumno(pos) == codigo) {
             return pos;
         } else {
-            while(listaColisiones[pos].get(i) != null && listaColisiones[pos].get(i).getCodigoDelAlumno() != codigo) {
-                i++;
-            }
-            
-            if(listaColisiones[pos].get(i).getCodigoDelAlumno() == codigo){
-                System.out.println("Elemento encontrado en la lista encadenada de posicion: " + i);
-                return pos;
-            } else {
+            try {
+                while(listaColisiones[pos].get(i) != null && listaColisiones[pos].get(i).getCodigoDelAlumno() != codigo) {
+                    i++;
+                }
+
+                if(listaColisiones[pos].get(i).getCodigoDelAlumno() == codigo){
+                    System.out.println("Elemento encontrado en la lista encadenada de posicion: " + i);
+                    return pos;
+                } else {
+                    return -1;
+                }
+            } catch (IndexOutOfBoundsException ex) {
                 return -1;
             }
+            
         }
     }
     
@@ -276,23 +281,47 @@ public class Instituto {
             return true;
             
         } else {
-            while(listaColisiones[pos].get(i) != null && listaColisiones[pos].get(i).getCodigoDelAlumno() != codigo) {
-                i++;
+            try {
+                while(listaColisiones[pos].get(i) != null && listaColisiones[pos].get(i).getCodigoDelAlumno() != codigo) {
+                    i++;
+                }
+
+                if(listaColisiones[pos].get(i).getCodigoDelAlumno() == codigo){
+
+                    listaColisiones[pos].get(i).setCodigoDelAlumno(0);
+                    listaColisiones[pos].get(i).setNombreDelAlumno("");
+                    listaColisiones[pos].get(i).setPensionDelAlumno(0);
+                    System.out.println("Elemento eliminado en la lista encadenada de posicion: " + i);
+                    return true;
+                }
+                else {
+                    return false;
+                }
             }
-            
-            if(listaColisiones[pos].get(i).getCodigoDelAlumno() == codigo){
-                
-                listaColisiones[pos].get(i).setCodigoDelAlumno(0);
-                listaColisiones[pos].get(i).setNombreDelAlumno("");
-                listaColisiones[pos].get(i).setPensionDelAlumno(0);
-                System.out.println("Elemento eliminado en la lista encadenada de posicion: " + i);
-                return true;
-            }
-            else {
+            catch(IndexOutOfBoundsException ex) {
                 return false;
             }
         }
         
+    }
+    
+    public void mostrarEncadenadas(int pos) {
+        int i=0;
+        if(listaColisiones[pos]!=null) {
+            try{
+                while(listaColisiones[pos].get(i) != null && listaColisiones[pos].get(i).getCodigoDelAlumno() != 0) {
+                System.out.printf("\t%d\t%20s%10.2f\n",
+                        listaColisiones[pos].get(i).getCodigoDelAlumno(),
+                        listaColisiones[pos].get(i).getNombreDelAlumno(),
+                        listaColisiones[pos].get(i).getPensionDelAlumno()
+                );
+                i++;
+            }
+            } catch(IndexOutOfBoundsException ex) {
+                
+            }
+            
+        }
     }
     
 }
