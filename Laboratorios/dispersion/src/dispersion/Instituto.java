@@ -13,10 +13,6 @@ public class Instituto {
         
         listaColisiones = new LinkedList[TAM_TABLA];
         
-        for (int i = 0; i < TAM_TABLA; i++) { 
-            listaColisiones[i] = new LinkedList<Alumno>(); 
-        } 
-        
         for (int i=0; i<TAM_TABLA; i++)
         {
             alumnos[i] = new Alumno(0,"",0);
@@ -237,6 +233,9 @@ public class Instituto {
             setNombreDelAlumno(nombre, pos);
             setPensionDelAlumno(pension, pos);
         } else {
+            if(listaColisiones[pos] == null)
+                listaColisiones[pos] = new LinkedList<Alumno>(); 
+            
             listaColisiones[pos].add(new Alumno(codigo, nombre, pension));
         }
         return true;
