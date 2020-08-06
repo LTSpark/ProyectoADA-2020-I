@@ -1,11 +1,22 @@
 package dispersion;
+
+import java.util.LinkedList;
+
 public class Instituto {
     private Alumno alumnos[];
     private final int TAM_TABLA = 20;
+    private LinkedList<Alumno>[] listaColisiones;
     public Instituto()
     {
 
         alumnos = new Alumno[TAM_TABLA];
+        
+        listaColisiones = new LinkedList[TAM_TABLA];
+        
+        for (int i = 0; i < TAM_TABLA; i++) { 
+            listaColisiones[i] = new LinkedList<Alumno>(); 
+        } 
+        
         for (int i=0; i<TAM_TABLA; i++)
         {
             alumnos[i] = new Alumno(0,"",0);
@@ -210,4 +221,79 @@ public class Instituto {
             return true;
         }
     }
+    
+    
+    //------------------------
+    //  POR ENCADENAMIENTO
+    //------------------------
+    
+    //INSERCIÓN POR ENCADENAMIENTO
+    
+    public boolean InsertarEncadenamiento(int codigo, String nombre, float pension) {
+        int pos = hash(codigo);
+        
+        if(getCodigoDelAlumno(pos) == 0) {
+            setCodigoDelAlumno(codigo, pos);
+            setNombreDelAlumno(nombre, pos);
+            setPensionDelAlumno(pension, pos);
+        } else {
+            listaColisiones[pos].add(new Alumno(codigo, nombre, pension));
+        }
+        return true;
+    }
+    
+    //BÚSQUEDA POR ENCADENAMIENTO
+    
+    public int BuscarEncadenamiento(int codigo) {
+        int pos = hash(codigo), i = 0;
+        
+        if (getCodigoDelAlumno(pos) == codigo) {
+            return pos;
+        } else {
+            while(listaColisiones[pos].get(i) != null && listaColisiones[pos].get(i).getCodigoDelAlumno() != codigo) {
+                i++;
+            }
+            
+            if(listaColisiones[pos].get(i).getCodigoDelAlumno() == codigo){
+                System.out.println("Elemento encontrado en la lista encadenada de posicion: " + i);
+                return pos;
+            } else {
+                return -1;
+            }
+        }
+    }
+    
+    //ELIMINACIÓN POR ENCADENAMIENTO
+    
+    public boolean EliminarEncadenamiento(int codigo)
+    {
+        int pos = hash(codigo), i = 0;
+        
+        if (getCodigoDelAlumno(pos) == codigo) {
+            
+            setCodigoDelAlumno(0,pos);
+            setNombreDelAlumno("",pos);
+            setPensionDelAlumno(0,pos);
+            return true;
+            
+        } else {
+            while(listaColisiones[pos].get(i) != null && listaColisiones[pos].get(i).getCodigoDelAlumno() != codigo) {
+                i++;
+            }
+            
+            if(listaColisiones[pos].get(i).getCodigoDelAlumno() == codigo){
+                
+                listaColisiones[pos].get(i).setCodigoDelAlumno(0);
+                listaColisiones[pos].get(i).setNombreDelAlumno("");
+                listaColisiones[pos].get(i).setPensionDelAlumno(0);
+                System.out.println("Elemento eliminado en la lista encadenada de posicion: " + i);
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        
+    }
+    
 }

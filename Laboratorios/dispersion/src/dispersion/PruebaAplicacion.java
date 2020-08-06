@@ -62,6 +62,8 @@ public static void main(String[] args)
                 System.out.println();
                 
                 exito = miInstituto.InsertarDDireccion(cod, name, pen);
+                //exito = miInstituto.InsertarEncadenamiento(cod, name, pen);
+                
                 if(exito){
                     System.out.println("Insertado con éxito");
                 }
@@ -73,7 +75,9 @@ public static void main(String[] args)
             case 2:
                 System.out.print("\n\nIngrese codigo: ");
                 cod=entrada.nextInt();
+                
                 pos = miInstituto.BuscarDDireccion(cod);
+                //pos = miInstituto.BuscarEncadenamiento(cod);
 
                 if (pos != -1 )
                 {
@@ -92,6 +96,8 @@ public static void main(String[] args)
                 cod=entrada.nextInt();
                 
                 exito = miInstituto.EliminarDDireccion(cod);
+                //exito = miInstituto.EliminarEncadenamiento(cod);
+                
                 if (exito)
                 {
                     System.out.println("\n\nEliminado correctamente"); 
