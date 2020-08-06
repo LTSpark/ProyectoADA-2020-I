@@ -37,7 +37,7 @@ public static void main(String[] args)
             miInstituto.getCodigoDelAlumno(i),
             miInstituto.getNombreDelAlumno(i),
             miInstituto.getPensionDelAlumno(i));
-            miInstituto.mostrarEncadenadas(i);
+            //miInstituto.mostrarEncadenadas(i);
         }
         System.out.println("-------------------------------------");
 
@@ -61,8 +61,8 @@ public static void main(String[] args)
                 pen=entrada.nextInt();
                 System.out.println();
                 
-                //exito = miInstituto.InsertarDDireccion(cod, name, pen);
-                exito = miInstituto.InsertarEncadenamiento(cod, name, pen);
+                exito = miInstituto.InsertarDDireccion(cod, name, pen);
+                //exito = miInstituto.InsertarEncadenamiento(cod, name, pen);
                 
                 if(exito){
                     System.out.println("Insertado con éxito");
@@ -95,8 +95,8 @@ public static void main(String[] args)
                 System.out.print("\n\nIngrese codigo: ");
                 cod=entrada.nextInt();
                 
-                //exito = miInstituto.EliminarDDireccion(cod);
-                exito = miInstituto.EliminarEncadenamiento(cod);
+                exito = miInstituto.EliminarDDireccion(cod);
+                //exito = miInstituto.EliminarEncadenamiento(cod);
                 
                 if (exito)
                 {
