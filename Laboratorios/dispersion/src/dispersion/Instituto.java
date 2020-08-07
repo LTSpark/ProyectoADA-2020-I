@@ -16,6 +16,7 @@ public class Instituto {
         for (int i=0; i<TAM_TABLA; i++)
         {
             alumnos[i] = new Alumno("","",0);
+            listaColisiones[i] = new LinkedList<Alumno>();
         }
     }
     public void setCodigoDelAlumno (String codigo, int i)
@@ -198,7 +199,7 @@ public class Instituto {
         int contador=0;
         //boolean flag = true;
         
-        while(getCodigoDelAlumno(pos).equals(codigo) && contador <TAM_TABLA){
+        while(!getCodigoDelAlumno(pos).equals(codigo) && contador <TAM_TABLA){
             pos = hashDDireccion(pos);
             contador++;
         }
@@ -240,9 +241,6 @@ public class Instituto {
             setNombreDelAlumno(nombre, pos);
             setPensionDelAlumno(pension, pos);
         } else {
-            if(listaColisiones[pos] == null)
-                listaColisiones[pos] = new LinkedList<Alumno>(); 
-            
             listaColisiones[pos].add(new Alumno(codigo, nombre, pension));
         }
         return true;
@@ -252,23 +250,24 @@ public class Instituto {
     
     public int BuscarEncadenamiento(String codigo) {
         int pos = hash(convInt(codigo)), i = 0;
+        int ultimo = listaColisiones[pos].size();
         
         if (getCodigoDelAlumno(pos).equals(codigo)) {
             return pos;
         } else {
             try {
-                while(listaColisiones[pos].get(i) != null && !listaColisiones[pos].get(i).getCodigoDelAlumno().equals(codigo)) {
+                while(i<ultimo && !listaColisiones[pos].get(i).getCodigoDelAlumno().equals(codigo)) {
                     i++;
                 }
 
-                if(listaColisiones[pos].get(i).getCodigoDelAlumno().equals(codigo)){
+                if(i == ultimo){
+                    return -1;
+                } else {
                     System.out.println("Elemento encontrado en la lista encadenada de posicion: " + i);
                     return pos;
-                } else {
-                    return -1;
                 }
             } catch (IndexOutOfBoundsException ex) {
-                return -1;
+                return -2;
             }
             
         }

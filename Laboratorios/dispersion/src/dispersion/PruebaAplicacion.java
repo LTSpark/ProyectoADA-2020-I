@@ -2,10 +2,18 @@
 package dispersion;
 
 import java.util.Scanner;
-
+import interfaz.principal;     
 
 public class PruebaAplicacion {
     public static void main(String[] args) {
+        
+        //---GUI---
+        principal dispersion = new principal();
+        dispersion.setTitle("Ingreso");
+        dispersion.setLocationRelativeTo(null);
+        dispersion.setVisible(true);
+        //---------
+        
         Instituto miInstituto = new Instituto();
     String codigo[] = {"100820", "100120", "200110", "204530", "100150",
         "100012", "100213", "100250", "100540", "100420"};
@@ -27,7 +35,7 @@ public class PruebaAplicacion {
     
     for (int i = 0; i < codigo.length; i++)
     {
-        flag = miInstituto.Insertar(codigo[i],nombre[i],pension[i]);
+        flag = miInstituto.InsertarDDireccion(codigo[i],nombre[i],pension[i]);
         if (flag==false) System.out.println("Tabla llena");
     }
     
