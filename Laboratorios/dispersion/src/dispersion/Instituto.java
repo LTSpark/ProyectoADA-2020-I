@@ -331,4 +331,92 @@ public class Instituto {
         }
     }
     
+    
+    public int BusquedaPruebaCuadratica(String codigo){
+        int pos = hash(convInt(codigo)), posSgte, i = 1;
+        
+        if(getCodigoDelAlumno(pos).equals(codigo))
+            return pos;
+        
+        else{
+            posSgte = pos + i*i;
+            
+            while(!"".equals(getCodigoDelAlumno(posSgte))
+                  && !getCodigoDelAlumno(posSgte).equals(codigo)
+                  && pos != posSgte){
+                
+                i++;
+                posSgte  = pos + i*i;
+                
+                if(posSgte >= TAM_TABLA){
+                    while(posSgte >= TAM_TABLA){
+                        posSgte -= TAM_TABLA;
+                    }                 
+                }
+                
+            }
+            
+            if("".equals(getCodigoDelAlumno(posSgte)) || pos == posSgte)
+                return -1;
+            
+            else
+                return posSgte;
+        }
+    }
+    
+        public boolean InsercionPruebaCuadratica(String codigo, String nombre, float pension){
+        int pos = hash(convInt(codigo)), posSgte, i = 1;
+        
+        if ("".equals(getCodigoDelAlumno(pos))){
+            setCodigoDelAlumno(codigo, pos);
+            setNombreDelAlumno(nombre, pos);
+            setPensionDelAlumno(pension, pos);
+            
+            return true; 
+        }
+        
+        else{
+            posSgte = pos + i*i;
+            
+            while(pos != posSgte && !"".equals(getCodigoDelAlumno(posSgte))){
+                i++;
+                posSgte = pos + i*i;
+                    
+                if(posSgte >= TAM_TABLA){
+                    while(posSgte >= TAM_TABLA){
+                        posSgte -= TAM_TABLA;
+                    }                 
+                }
+                                  
+            }
+            
+            if("".equals(getCodigoDelAlumno(posSgte))){
+                setCodigoDelAlumno(codigo, posSgte);
+                setNombreDelAlumno(nombre, posSgte);
+                setPensionDelAlumno(pension, posSgte);
+            
+                return true;
+            }
+            
+            else
+                return false;
+            
+        }
+
+    }
+    
+    public boolean EliminarPruebaCuadratica(String codigo)
+    {
+        int alumnoAEliminar = BusquedaPruebaCuadratica(codigo);
+        if(alumnoAEliminar == -1){
+            return false;
+        }
+        else{
+            setCodigoDelAlumno("",alumnoAEliminar);
+            setNombreDelAlumno("",alumnoAEliminar);
+            setPensionDelAlumno(0,alumnoAEliminar);
+            return true;
+        }
+    }
+    
 }
