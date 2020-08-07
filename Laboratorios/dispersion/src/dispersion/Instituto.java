@@ -141,7 +141,7 @@ public class Instituto {
     }
 
     public boolean EliminarLineal (String codigo){
-        int alumnoAEliminar = BuscarLineal(codigo);
+        int alumnoAEliminar = Buscar(codigo);
         if(alumnoAEliminar == -1){
             return false;
         }
