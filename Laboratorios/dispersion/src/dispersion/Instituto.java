@@ -47,9 +47,12 @@ public class Instituto {
         return TAM_TABLA;
     }
 
-    public int hash(int clave)
-    {
-        return clave%19;
+    public int  hash(String clave) {
+        int s=0;
+        for(int i=0;i<clave.length();i++){
+            s+=(int)clave.charAt(i);
+        }
+        return s%19;
     }
 
     public boolean Insertar(int codigo, String nombre, float pension)
@@ -225,36 +228,36 @@ public class Instituto {
     
     //INSERCIÓN POR ENCADENAMIENTO
     
-    public boolean InsertarEncadenamiento(int codigo, String nombre, float pension) {
+    public boolean InsertarEncadenamiento(String codigo, String nombre, float pension) {
         int pos = hash(codigo);
         
         if(getCodigoDelAlumno(pos) == 0) {
-            setCodigoDelAlumno(codigo, pos);
+            setCodigoDelAlumno(Integer.parseInt(codigo), pos);
             setNombreDelAlumno(nombre, pos);
             setPensionDelAlumno(pension, pos);
         } else {
             if(listaColisiones[pos] == null)
                 listaColisiones[pos] = new LinkedList<Alumno>(); 
             
-            listaColisiones[pos].add(new Alumno(codigo, nombre, pension));
+            listaColisiones[pos].add(new Alumno(Integer.parseInt(codigo), nombre, pension));
         }
         return true;
     }
     
     //BÚSQUEDA POR ENCADENAMIENTO
     
-    public int BuscarEncadenamiento(int codigo) {
+    public int BuscarEncadenamiento(String codigo) {
         int pos = hash(codigo), i = 0;
         
-        if (getCodigoDelAlumno(pos) == codigo) {
+        if (getCodigoDelAlumno(pos) == Integer.parseInt(codigo)) {
             return pos;
         } else {
             try {
-                while(listaColisiones[pos].get(i) != null && listaColisiones[pos].get(i).getCodigoDelAlumno() != codigo) {
+                while(listaColisiones[pos].get(i) != null && listaColisiones[pos].get(i).getCodigoDelAlumno() != Integer.parseInt(codigo)) {
                     i++;
                 }
 
-                if(listaColisiones[pos].get(i).getCodigoDelAlumno() == codigo){
+                if(listaColisiones[pos].get(i).getCodigoDelAlumno() == Integer.parseInt(codigo)){
                     System.out.println("Elemento encontrado en la lista encadenada de posicion: " + i);
                     return pos;
                 } else {
@@ -269,11 +272,11 @@ public class Instituto {
     
     //ELIMINACIÓN POR ENCADENAMIENTO
     
-    public boolean EliminarEncadenamiento(int codigo)
+    public boolean EliminarEncadenamiento(String codigo)
     {
         int pos = hash(codigo), i = 0;
         
-        if (getCodigoDelAlumno(pos) == codigo) {
+        if (getCodigoDelAlumno(pos) == Integer.parseInt(codigo)) {
             
             setCodigoDelAlumno(0,pos);
             setNombreDelAlumno("",pos);
@@ -282,11 +285,11 @@ public class Instituto {
             
         } else {
             try {
-                while(listaColisiones[pos].get(i) != null && listaColisiones[pos].get(i).getCodigoDelAlumno() != codigo) {
+                while(listaColisiones[pos].get(i) != null && listaColisiones[pos].get(i).getCodigoDelAlumno() != Integer.parseInt(codigo)) {
                     i++;
                 }
 
-                if(listaColisiones[pos].get(i).getCodigoDelAlumno() == codigo){
+                if(listaColisiones[pos].get(i).getCodigoDelAlumno() == Integer.parseInt(codigo)){
 
                     listaColisiones[pos].get(i).setCodigoDelAlumno(0);
                     listaColisiones[pos].get(i).setNombreDelAlumno("");
