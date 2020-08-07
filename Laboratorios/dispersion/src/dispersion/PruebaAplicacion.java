@@ -1,5 +1,5 @@
 
-package dispersion1;
+package dispersion;
 
 import java.util.Scanner;
 
@@ -55,9 +55,9 @@ public class PruebaAplicacion {
         
             case 1:
                 System.out.print("\n\nIngrese codigo: ");
+                entrada.nextLine();
                 cod=entrada.nextLine();
                 System.out.print("Ingrese nombre: ");
-                entrada.nextLine();
                 name=entrada.nextLine();
                 System.out.print("Ingrese pension: ");
                 pen=entrada.nextInt();
@@ -76,6 +76,7 @@ public class PruebaAplicacion {
                 break;
             case 2:
                 System.out.print("\n\nIngrese codigo: ");
+                entrada.nextLine();
                 cod=entrada.nextLine();
                 
                 //pos = miInstituto.BuscarDDireccion(cod);
@@ -95,10 +96,10 @@ public class PruebaAplicacion {
                 break;
             case 3:
                 System.out.print("\n\nIngrese codigo: ");
+                entrada.nextLine();
                 cod=entrada.nextLine();
                 
                 exito = miInstituto.EliminarDDireccion(cod);
-                //exito = miInstituto.EliminarEncadenamiento(cod);
                 
                 if (exito)
                 {
@@ -127,5 +128,3 @@ public class PruebaAplicacion {
     }
         
     }
-    
-}

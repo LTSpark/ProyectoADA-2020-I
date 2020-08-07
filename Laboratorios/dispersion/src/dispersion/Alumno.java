@@ -1,20 +1,20 @@
 package dispersion;
 public class Alumno {
-    private int codigoDelAlumno;
+    private String codigoDelAlumno;
     private String nombreDelAlumno;
     private float pensionDelAlumno;
-    public Alumno(int codigo, String nombre, float pension)
+    public Alumno(String codigo, String nombre, float pension)
     {
         codigoDelAlumno = codigo;
         nombreDelAlumno = nombre;
         pensionDelAlumno = pension;
     }
     
-        public void setCodigoDelAlumno(int codigo)
+        public void setCodigoDelAlumno(String codigo)
     {
         codigoDelAlumno = codigo;
     }
-        public int getCodigoDelAlumno()
+        public String getCodigoDelAlumno()
     {
         return codigoDelAlumno;
     }

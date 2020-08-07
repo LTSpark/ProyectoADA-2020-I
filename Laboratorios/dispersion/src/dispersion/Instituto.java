@@ -15,14 +15,14 @@ public class Instituto {
         
         for (int i=0; i<TAM_TABLA; i++)
         {
-            alumnos[i] = new Alumno(0,"",0);
+            alumnos[i] = new Alumno("","",0);
         }
     }
-    public void setCodigoDelAlumno (int codigo, int i)
+    public void setCodigoDelAlumno (String codigo, int i)
     {
         alumnos[i].setCodigoDelAlumno(codigo);
     }
-    public int getCodigoDelAlumno (int i)
+    public String getCodigoDelAlumno (int i)
     {
         return alumnos[i].getCodigoDelAlumno();
     }
@@ -47,19 +47,23 @@ public class Instituto {
         return TAM_TABLA;
     }
 
-    public int  hash(String clave) {
-        int s=0;
+    public int convInt(String clave){
+        int nuevaclave=0;
         for(int i=0;i<clave.length();i++){
-            s+=(int)clave.charAt(i);
+            nuevaclave+=(int)clave.charAt(i);
         }
-        return s%19;
+        return nuevaclave;
+    }
+    
+    public int  hash(int nclave) {
+        return nclave%19;
     }
 
-    public boolean Insertar(int codigo, String nombre, float pension)
+    public boolean Insertar(String codigo, String nombre, float pension)
     {
         int pos, pos_sigte;
-        pos = hash (codigo);
-        if (getCodigoDelAlumno(pos)==0)
+        pos = hash (convInt(codigo));
+        if (getCodigoDelAlumno(pos).equals(""))
         {
             setCodigoDelAlumno(codigo, pos);
             setNombreDelAlumno(nombre, pos);
@@ -70,7 +74,7 @@ public class Instituto {
         else{
             pos_sigte = pos + 1;
             while(pos_sigte < getNumeroDeAlumnos() &&
-            getCodigoDelAlumno(pos_sigte) !=0 &&
+            !getCodigoDelAlumno(pos_sigte).equals("") &&
             pos_sigte!=pos)
             {
             pos_sigte++;
@@ -78,7 +82,7 @@ public class Instituto {
             pos_sigte=0;
 
             }
-            if (getCodigoDelAlumno(pos_sigte)==0)
+            if (getCodigoDelAlumno(pos_sigte).equals(""))
             {
             setCodigoDelAlumno(codigo, pos_sigte);
             setNombreDelAlumno(nombre, pos_sigte);
@@ -90,26 +94,26 @@ public class Instituto {
 
         }
     }
-    public int Buscar(int codigo)
+    public int Buscar(String codigo)
     {
         int pos, pos_sigte;
-        pos = hash (codigo);
-        if (getCodigoDelAlumno(pos)==codigo)
+        pos = hash (convInt(codigo));
+        if (getCodigoDelAlumno(pos).equals(codigo))
         return pos;
         else //Se produce colisión: Solución por reasignación por prueba lineal
         {
             pos_sigte = pos + 1;
             while(pos_sigte < getNumeroDeAlumnos() &&
-            getCodigoDelAlumno(pos_sigte) !=0 &&
+            !getCodigoDelAlumno(pos_sigte).equals("") &&
             pos_sigte!=pos &&
-            getCodigoDelAlumno(pos)!=codigo)
+            getCodigoDelAlumno(pos).equals(codigo))
             {
                 pos_sigte++;
                 if ( pos_sigte == getNumeroDeAlumnos())
                 pos_sigte=0;
 
             }
-            if (getCodigoDelAlumno(pos_sigte)==0 || pos_sigte==pos)
+            if (getCodigoDelAlumno(pos_sigte).equals("") || pos_sigte==pos)
             {
                 return -1; //código no existe
             }
@@ -121,10 +125,10 @@ public class Instituto {
     //  POR ELIMINACIÓN LINEAL
     //-----------------------
 
-    public int BuscarLineal(int codigo){
-        int pos=hash(codigo);
+    public int BuscarLineal(String codigo){
+        int pos=hash(convInt(codigo));
         int contador=0;
-        while(codigo!=getCodigoDelAlumno(pos)&&contador<TAM_TABLA){
+        while(!getCodigoDelAlumno(pos).equals(codigo)&&contador<TAM_TABLA){
             pos++;
             contador++;
         }
@@ -136,13 +140,13 @@ public class Instituto {
         }
     }
 
-    public boolean EliminarLineal (int codigo){
+    public boolean EliminarLineal (String codigo){
         int alumnoAEliminar = BuscarLineal(codigo);
         if(alumnoAEliminar == -1){
             return false;
         }
         else{
-            setCodigoDelAlumno(0,alumnoAEliminar);
+            setCodigoDelAlumno("",alumnoAEliminar);
             setNombreDelAlumno("",alumnoAEliminar);
             setPensionDelAlumno(0,alumnoAEliminar);
             return true;
@@ -161,14 +165,14 @@ public class Instituto {
         return salida;
     }
     //INSERCIÓN POR DOBLE DIRECCIÓN
-    public boolean InsertarDDireccion(int codigo, String nombre, float pension)
+    public boolean InsertarDDireccion(String codigo, String nombre, float pension)
     {
-        int pos = hash(codigo);
+        int pos = hash(convInt(codigo));
         int contador=0;
         boolean flag = false;
         
         while(flag == false && contador <TAM_TABLA){
-            if(getCodigoDelAlumno(pos)==0){
+            if(getCodigoDelAlumno(pos).equals("")){
                 flag = true;
             }
             else{
@@ -188,13 +192,13 @@ public class Instituto {
         }
     }
     //BÚSQUEDA POR DOBLE DIRECCIÓN
-    public int BuscarDDireccion(int codigo)
+    public int BuscarDDireccion(String codigo)
     {
-        int pos = hash(codigo);
+        int pos = hash(convInt(codigo));
         int contador=0;
         //boolean flag = true;
         
-        while(codigo != getCodigoDelAlumno(pos) && contador <TAM_TABLA){
+        while(getCodigoDelAlumno(pos).equals(codigo) && contador <TAM_TABLA){
             pos = hashDDireccion(pos);
             contador++;
         }
@@ -207,14 +211,14 @@ public class Instituto {
         }
     }
     //ELIMINACIÓN POR DOBLE DIRECCIÓN
-    public boolean EliminarDDireccion(int codigo)
+    public boolean EliminarDDireccion(String codigo)
     {
         int alumnoAEliminar = BuscarDDireccion(codigo);
         if(alumnoAEliminar == -1){
             return false;
         }
         else{
-            setCodigoDelAlumno(0,alumnoAEliminar);
+            setCodigoDelAlumno("",alumnoAEliminar);
             setNombreDelAlumno("",alumnoAEliminar);
             setPensionDelAlumno(0,alumnoAEliminar);
             return true;
@@ -229,17 +233,17 @@ public class Instituto {
     //INSERCIÓN POR ENCADENAMIENTO
     
     public boolean InsertarEncadenamiento(String codigo, String nombre, float pension) {
-        int pos = hash(codigo);
+        int pos = hash(convInt(codigo));
         
-        if(getCodigoDelAlumno(pos) == 0) {
-            setCodigoDelAlumno(Integer.parseInt(codigo), pos);
+        if(getCodigoDelAlumno(pos).equals("")) {
+            setCodigoDelAlumno(codigo, pos);
             setNombreDelAlumno(nombre, pos);
             setPensionDelAlumno(pension, pos);
         } else {
             if(listaColisiones[pos] == null)
                 listaColisiones[pos] = new LinkedList<Alumno>(); 
             
-            listaColisiones[pos].add(new Alumno(Integer.parseInt(codigo), nombre, pension));
+            listaColisiones[pos].add(new Alumno(codigo, nombre, pension));
         }
         return true;
     }
@@ -247,17 +251,17 @@ public class Instituto {
     //BÚSQUEDA POR ENCADENAMIENTO
     
     public int BuscarEncadenamiento(String codigo) {
-        int pos = hash(codigo), i = 0;
+        int pos = hash(convInt(codigo)), i = 0;
         
-        if (getCodigoDelAlumno(pos) == Integer.parseInt(codigo)) {
+        if (getCodigoDelAlumno(pos).equals(codigo)) {
             return pos;
         } else {
             try {
-                while(listaColisiones[pos].get(i) != null && listaColisiones[pos].get(i).getCodigoDelAlumno() != Integer.parseInt(codigo)) {
+                while(listaColisiones[pos].get(i) != null && !listaColisiones[pos].get(i).getCodigoDelAlumno().equals(codigo)) {
                     i++;
                 }
 
-                if(listaColisiones[pos].get(i).getCodigoDelAlumno() == Integer.parseInt(codigo)){
+                if(listaColisiones[pos].get(i).getCodigoDelAlumno().equals(codigo)){
                     System.out.println("Elemento encontrado en la lista encadenada de posicion: " + i);
                     return pos;
                 } else {
@@ -274,24 +278,24 @@ public class Instituto {
     
     public boolean EliminarEncadenamiento(String codigo)
     {
-        int pos = hash(codigo), i = 0;
+        int pos = hash(convInt(codigo)), i = 0;
         
-        if (getCodigoDelAlumno(pos) == Integer.parseInt(codigo)) {
+        if (getCodigoDelAlumno(pos).equals(codigo)) {
             
-            setCodigoDelAlumno(0,pos);
+            setCodigoDelAlumno("",pos);
             setNombreDelAlumno("",pos);
             setPensionDelAlumno(0,pos);
             return true;
             
         } else {
             try {
-                while(listaColisiones[pos].get(i) != null && listaColisiones[pos].get(i).getCodigoDelAlumno() != Integer.parseInt(codigo)) {
+                while(listaColisiones[pos].get(i) != null && listaColisiones[pos].get(i).getCodigoDelAlumno().equals(codigo)) {
                     i++;
                 }
 
-                if(listaColisiones[pos].get(i).getCodigoDelAlumno() == Integer.parseInt(codigo)){
+                if(listaColisiones[pos].get(i).getCodigoDelAlumno().equals(codigo)){
 
-                    listaColisiones[pos].get(i).setCodigoDelAlumno(0);
+                    listaColisiones[pos].get(i).setCodigoDelAlumno("");
                     listaColisiones[pos].get(i).setNombreDelAlumno("");
                     listaColisiones[pos].get(i).setPensionDelAlumno(0);
                     System.out.println("Elemento eliminado en la lista encadenada de posicion: " + i);
@@ -312,7 +316,7 @@ public class Instituto {
         int i=0;
         if(listaColisiones[pos]!=null) {
             try{
-                while(listaColisiones[pos].get(i) != null && listaColisiones[pos].get(i).getCodigoDelAlumno() != 0) {
+                while(listaColisiones[pos].get(i) != null && !listaColisiones[pos].get(i).getCodigoDelAlumno().equals("")) {
                 System.out.printf("\t%d\t%20s%10.2f\n",
                         listaColisiones[pos].get(i).getCodigoDelAlumno(),
                         listaColisiones[pos].get(i).getNombreDelAlumno(),
