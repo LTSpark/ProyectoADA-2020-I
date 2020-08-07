@@ -118,6 +118,7 @@ public class PruebaAplicacion {
                 break;
             case 4:
                 System.out.print("\n\nIngrese codigo: ");
+                entrada.nextLine();
                 cod=entrada.nextLine();
 
                 exito = miInstituto.EliminarLineal(cod);
@@ -127,6 +128,7 @@ public class PruebaAplicacion {
                 }
                 else
                     System.out.println("\n\nCodigo de alumno no existe");
+
                 break;
             default:
                 opc = 0;
@@ -135,4 +137,4 @@ public class PruebaAplicacion {
     while(opc != 0);
     }
         
-    }
+}
