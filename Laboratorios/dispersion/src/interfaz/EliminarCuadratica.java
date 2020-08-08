@@ -5,6 +5,8 @@
  */
 package interfaz;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author HP
@@ -45,7 +47,7 @@ public class EliminarCuadratica extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 190, -1, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 183, -1, 30));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondo.jpg"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 380, 280));
@@ -54,12 +56,19 @@ public class EliminarCuadratica extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        String cod = this.jTextField1.getText();
         
-         tablaEliminacionCuadratica elc=new tablaEliminacionCuadratica();
+        principal prin = new principal();
+        boolean result = prin.miInstituto.EliminarPruebaCuadratica(cod);
+        if(result == true){
+            JOptionPane.showMessageDialog(null,"Eliminado correctamente");
+        }
+        else{
+            JOptionPane.showMessageDialog(null,"No se ha podido eliminar");
+        }       // TODO add your handling code here:
         
-        elc.setVisible(true);
-        
+        tablaEliminacionDoble ted=new tablaEliminacionDoble();
+        ted.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 

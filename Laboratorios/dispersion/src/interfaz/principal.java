@@ -11,7 +11,7 @@ import dispersion.*;
  */
 public class principal extends javax.swing.JFrame {
 
-    public static Instituto miInstituto;
+    public Instituto miInstituto;
     /**
      * Creates new form dispersion
      */

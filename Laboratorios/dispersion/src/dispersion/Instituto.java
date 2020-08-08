@@ -47,6 +47,7 @@ public class Instituto {
     {
         return TAM_TABLA;
     }
+            
 
     public int convInt(String clave){
         int nuevaclave=0;
@@ -355,7 +356,7 @@ public class Instituto {
                 
             }
             
-            if("".equals(getCodigoDelAlumno(posSgte)) || pos == posSgte)
+            if("".equals(getCodigoDelAlumno(posSgte)) || pos != posSgte)
                 return -1;
             
             else

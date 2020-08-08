@@ -5,6 +5,8 @@
  */
 package interfaz;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author HP
@@ -54,7 +56,18 @@ public class BusquedaCuadratica extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // aqui un joptiopane para que salga , ya que son muchas interfaces
+        String cod = this.jTextField1.getText();
+        
+        principal prin = new principal();
+        int pos = prin.miInstituto.BusquedaPruebaCuadratica(cod);
+        if(pos != -1){
+            JOptionPane.showMessageDialog(null,"Alumno: " + prin.miInstituto.getNombreDelAlumno(pos) 
+                                             +"\nCódigo:" + prin.miInstituto.getCodigoDelAlumno(pos)
+                                           +"\nPensión: " + prin.miInstituto.getPensionDelAlumno(pos)); 
+        }
+        else{
+            JOptionPane.showMessageDialog(null,"El alumno no ha sido encontrado");
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

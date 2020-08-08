@@ -5,6 +5,8 @@
  */
 package interfaz;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author HP
@@ -40,13 +42,13 @@ public class InsercionCyNyPCuadratica extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setText("INGRESE CÓDICO:");
+        jLabel2.setText("INGRESE CÓDIGO:");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, -1, 10));
 
-        jLabel3.setText("INGRESE CÓDICO:");
+        jLabel3.setText("INGRESE NOMBRE:");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, -1, 10));
 
-        jLabel4.setText("INGRESE CÓDICO:");
+        jLabel4.setText("INGRESE PENSION:");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, -1, 10));
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
@@ -97,11 +99,23 @@ public class InsercionCyNyPCuadratica extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-tablaInsercionCuadratica tablaic=new tablaInsercionCuadratica();
+        String cod = this.jTextField1.getText();
+        String nom = this.jTextField2.getText();
+        int pen = Integer.parseInt(jTextField3.getText());
         
-        tablaic.setVisible(true);
+        principal prin = new principal();
+        boolean result = prin.miInstituto.InsercionPruebaCuadratica(cod,nom,pen);
+        if(result == true){
+            JOptionPane.showMessageDialog(null,"Ingresado correctamente");
+        }
+        else{
+            JOptionPane.showMessageDialog(null,"No se ha podido ingresar");
+        }       // TODO add your handling code here:
         
-        this.setVisible(false);        // TODO add your handling code here:
+        tablaInsercionDoble tablai=new tablaInsercionDoble();
+        
+        tablai.setVisible(true);
+        this.setVisible(false); 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
