@@ -1,12 +1,19 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package laboratorio07;
+
 
 public class Factorial {
 
-    double n;
-    private int contadorIterativo=0;
-    private int contadorRecursivo=0;
+    private int contadorIterativo;
+    private int contadorRecursivo;
 
-    Factorial(double n) {
-        this.n=n;
+    Factorial() {
+        this.contadorIterativo = 0;
+        this.contadorRecursivo = 0;
     }
 
     public void mostrarContadores(){
@@ -14,7 +21,7 @@ public class Factorial {
         System.out.println("Eficiencia iterativa: "+contadorIterativo);
     }
 
-    public double factorialRecursivo(double n){
+    public int factorialRecursivo(int n){
         if(n==0){
             contadorRecursivo++;
             return 1;
@@ -26,9 +33,8 @@ public class Factorial {
         }
     }
 
-    public double factorialIterativo(){
-        double resultado=1;
-
+    public int factorialIterativo(int n){
+        int resultado=1;
         while(n>1){
             resultado=resultado*n;
             n--;
@@ -38,3 +44,4 @@ public class Factorial {
 
     }
 }
+
