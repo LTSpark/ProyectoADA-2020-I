@@ -41,7 +41,18 @@ public class Laboratorio07 {
                     fa.mostrarContadores();
                     break;
                 case 2:
-                    //insertar metodos MCD 
+                    System.out.print("\nIngrese su primer número: ");
+                    int n1 = entrada.nextInt();
+                    System.out.print("\nIngrese su segundo número: ");
+                    int n2 = entrada.nextInt();
+                    
+                    MCD mcd = new MCD();
+                    System.out.println("MCD Iterativo");
+                    System.out.println(mcd.MCDIterativo(n1, n2));
+                    System.out.println("MCD Recursivo");
+                    System.out.println(mcd.MCDRecursivo(n1, n2));
+                    mcd.mostrarContadores();
+
                     break;
                 case 3:
                     System.out.print("\nIngrese la posición: ");
@@ -54,7 +65,11 @@ public class Laboratorio07 {
                     fibonacci.mostrarContadores();
                     break;
                 case 4:
-                    //insertar metodos torres de hanoi
+                    System.out.println("\nIngrese el numero de discos: ");
+                    n = entrada.nextInt();
+                    Hanoi hanoi = new Hanoi();
+                    hanoi.torresHanoi(n, "Origen", "Destino", "Auxiliar");
+                    System.out.println("\nEficiencia Recursiva: " + hanoi.getContadorRecursivo());
                     break;
                 case 5:
                     System.out.println("FIN DEL PROGRAMA");
