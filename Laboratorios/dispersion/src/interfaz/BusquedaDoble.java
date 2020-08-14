@@ -5,7 +5,6 @@
  */
 package interfaz;
 import javax.swing.JOptionPane;
-import dispersion.*;
 /**
  *
  * @author HP
