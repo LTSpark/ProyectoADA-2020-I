@@ -1,5 +1,5 @@
 
-package proyecto;
+package Clases;
 
 public class Barra {
     private String material;

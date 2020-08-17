@@ -1,5 +1,5 @@
 
-package proyecto;
+package Clases;
 
 public class MaquinaOrdenadora extends Maquina{
     public MaquinaOrdenadora(String id, String tipo, String modelo){

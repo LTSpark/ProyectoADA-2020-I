@@ -1,5 +1,5 @@
 
-package proyecto;
+package Clases;
 
 public class Empleado_Cortador extends Empleado{
     public Empleado_Cortador(String id, String nombre, String apellido){

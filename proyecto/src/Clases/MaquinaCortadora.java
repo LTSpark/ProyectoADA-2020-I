@@ -1,4 +1,4 @@
-package proyecto;
+package Clases;
 
 
 public class MaquinaCortadora extends Maquina{
