@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class Lote {
     private String material;
+    private id;
     private int cantidad;
     private Barra barras[] = new Barra[150];
 
@@ -39,5 +40,11 @@ public class Lote {
     }
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
+    }
+    public int getId() {
+        return id;
+    }
+    public void setId(int cantidad) {
+        this.id= id;
     }
 }
